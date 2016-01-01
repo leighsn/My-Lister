@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Your List</title>
+	</head>
+	<body>
+
+    <h1><%= @list.name %>:</h1>
+    <%@items.each do |item| %>
+    <ul>
+      <li><%=item.name%></li>
+    <%end%>
+
+    </ul>
+	</body>
+</html>

@@ -1,4 +1,6 @@
 require_relative "config/environment"
 
-use HelloController
+use Rack::MethodOverride
 run ApplicationController
+use ListController
+use UserController

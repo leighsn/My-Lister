@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home</title>
+	</head>
+	<body>
+    <h1>Welcome, <%= @user.name %>!</h1>
+    <%if @user.lists == [] %>
+		<p><%= "Looks like you don't have any lists yet." %></p>
+		<% else %>
+		<%@user.lists.each do |list| %>
+		<p><a href="/lists/<%=list.slug%>"><%=list.name %></a></p>
+			<%end%>
+		<%end%>
+		<p>Add a new list: </p>
+			<form action="/list" method="POST">
+		<p>Name:
+      <input type ="text" name="<%=@user.id%>">
+      <br>
+      <input type="submit" value="Enter">
+    </form>
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>New List</title>
+	</head>
+	<body>
+
+    <h1><%= @list.name %>!</h1>
+		<p>Hit enter to add items to your list. Save when you're finished. </p>
+			<form action="/list/new" method="POST">
+		<label>Item:</label>
+		<ul id="list">
+		</ul>
+      <input id="field" type="text">
+
+			<input id="items" type="hidden" name="items_in_list">
+			<input id="id" type="hidden" name="id" value="<%= @list.id %>">
+
+			<br>
+      <input id="submit" type="submit" value="Save">
+    </form>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="scripts/app.js"></script>
+	</body>
+</html>
