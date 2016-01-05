@@ -2,24 +2,28 @@
 <html>
 	<head>
 		<title>New List</title>
+
+		<link rel="stylesheet" type="text/css" href="/styles/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/styles/bootstrap/bootstrap-theme.min.css">
 	</head>
 	<body>
+		<div class="container">
+    <h1 class="text-center"><%= @list.name %>!</h1>
+		<p>Hit enter to save items to your list. </p>
+			<form id="form" action="/list/new" method="POST">
+				<h3>Items:</h3>
+				<div id="list">
+				</div>
+      	<input id="field" type="text" name="name">
 
-    <h1><%= @list.name %>!</h1>
-		<p>Hit enter to add items to your list. Save when you're finished. </p>
-			<form action="/list/new" method="POST">
-		<label>Item:</label>
-		<ul id="list">
-		</ul>
-      <input id="field" type="text">
+				<input id="items" type="hidden" name="items">
+				<input id="id" type="hidden" name="id" value="<%= @list.id %>">
 
-			<input id="items" type="hidden" name="items_in_list">
-			<input id="id" type="hidden" name="id" value="<%= @list.id %>">
-
-			<br>
-      <input id="submit" type="submit" value="Save">
+				<br></br>
+				<a href="/user/<%=@user.slug%>" class="btn btn-info" role="button">My Lists</a>
     </form>
+	</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="scripts/app.js"></script>
+		<script src="/scripts/app.js"></script>
 	</body>
 </html>

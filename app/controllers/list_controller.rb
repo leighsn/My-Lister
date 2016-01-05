@@ -10,20 +10,19 @@ class ListController < ApplicationController
     erb :'list/new'
   end
 
-  post '/list/new' do
-    @list_id = params[:id]
-    @list = List.find_by(id: @list_id)
-    @items = JSON.parse(params[:items_in_list])
-    @items.each {|item| Item.create(name: item, list_id: @list_id)}
-    redirect to "/list/#{@list.slug}"
-  end
-
   get '/list/:slug' do
     @list = List.find_by_slug(params[:slug])
     @list_id = @list.id
     @items = Item.all.where(list_id: @list_id)
-    binding.pry
     erb :'list/show'
+  end
+
+  post '/list/add_user' do
+    @user = User.find_or_create_by(name: params[:user])
+    @list = List.find_by(id: params[:list_id])
+    @items = Item.all.where(list_id: @list.id)
+    @userlist = UserList.create(list_id: @list.id, user_id: @user.id)
+    erb :'user/show'
   end
 
 

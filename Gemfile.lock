@@ -58,6 +58,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  json
   pry
   rake
   require_all

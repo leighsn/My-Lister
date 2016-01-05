@@ -2,23 +2,27 @@
 <html>
 	<head>
 		<title>Home</title>
+		<link rel="stylesheet" type="text/css" href="/styles/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/styles/bootstrap/bootstrap-theme.min.css">
 	</head>
 	<body>
+		<div class="container">
     <h1>Welcome, <%= @user.name %>!</h1>
     <%if @user.lists == [] %>
 		<p><%= "Looks like you don't have any lists yet." %></p>
 		<% else %>
+		<h3>Your lists: </h3>
 		<%@user.lists.each do |list| %>
-		<p><a href="/lists/<%=list.slug%>"><%=list.name %></a></p>
+		<p><a href="/<%=@user.slug%>/list/<%=list.slug%>"><%=list.name %></a></p>
 			<%end%>
 		<%end%>
 		<p>Add a new list: </p>
-			<form action="/list" method="POST">
+			<form action="/user/<%=@user.slug%>/new" method="POST">
 		<p>Name:
-      <input type ="text" name="<%=@user.id%>">
-      <br>
-      <input type="submit" value="Enter">
+      <input type ="text" name="name">
+      <br></br>
+      <input type="submit" class="btn btn-info" value="Enter">
     </form>
-
+	</div>
   </body>
 </html>

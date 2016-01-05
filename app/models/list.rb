@@ -4,7 +4,7 @@ class List < ActiveRecord::Base
   has_many :users, through: :user_lists
 
   def slug
-    self.name.slugify
+    self.name ? self.name.slugify : ""
   end
 
   def self.find_by_slug(slug_name)

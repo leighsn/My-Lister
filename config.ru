@@ -4,3 +4,4 @@ use Rack::MethodOverride
 run ApplicationController
 use ListController
 use UserController
+use ItemController

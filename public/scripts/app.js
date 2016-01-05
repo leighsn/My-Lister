@@ -1,36 +1,49 @@
-
-//push input text onto array
-//add input text onto page using jquery <li>
-//clear input field
-var items_in_list = [];
-
 $(document).ready(function(){
   $("#field").keypress(function( event ) {
   if (event.keyCode == 13) {
      event.preventDefault();
      var input = $(this).val();
-     pushInput(input);
-     addItemToPage(input);
+     saveItemToList(input);
      clearInputField();
    }
  });
+})
 
- $("#submit").click(function( event ) {
-   $("#items").val(JSON.stringify(items_in_list));
- });
-
-
-});
-
-function pushInput(input){
-  //TODO: - figure out duplicates
-  items_in_list.push(input);
-};
-
-function addItemToPage(input){
-  $("#list").append($("<li>").text(input));
-};
+function saveItemToList(input){
+  $.post(
+          "/item/new",
+          { name: $('#field').val(), list_id: $("#id").val() },
+          function(data) {
+            addItemToPage(input, data.id);
+          }
+       );
+}
 
 function clearInputField(){
   $('#field').val("");
-};
+}
+
+function addItemToPage(input, id){
+    var div = $("<div id=" + id + "></div>")
+    var label = $("<label>").text(input + " ");
+    var button = $('<button/>',
+        { text: 'Delete',
+          click: function (e) {
+            e.preventDefault();
+            $.post(
+              "/item/delete",
+              { item_id: id},
+              function(innerData) {
+                deleteItemFromPage(innerData.id);
+              }
+            );
+        }
+      });
+    $("#list").append(div);
+    $("#" + id).append(label);
+    $("#" + id).append(button.addClass("btn-default"));
+}
+
+function deleteItemFromPage(id) {
+ $("#" + id).remove();
+}

@@ -2,15 +2,27 @@
 <html>
 	<head>
 		<title>Your List</title>
+		<link rel="stylesheet" type="text/css" href="/styles/bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/styles/bootstrap/bootstrap-theme.min.css">
 	</head>
 	<body>
+	<div class="container">
 
     <h1><%= @list.name %>:</h1>
+		<ul>
     <%@items.each do |item| %>
-    <ul>
       <li><%=item.name%></li>
     <%end%>
 
     </ul>
+		<a href="/user/<%=@user.slug%>" class="btn btn-info" role="button">My Lists</a>
+
+		<form action='/list/add_user' method="POST">
+		<p>Add another user to list:
+			<input type="text" name="user"></p>
+			<input type="hidden" name="list_id" value="<%=@list.id%>">
+			<input type="submit" class="btn btn-info" value="Add User">
+		</form>
+	</div>
 	</body>
 </html>
